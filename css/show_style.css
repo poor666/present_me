@@ -1,0 +1,32 @@
+*{
+  margin:0;
+  padding:0;
+}
+
+#main{
+	margin:0px auto;
+  width:99%;
+}
+
+body{
+  background-image:url("../export/fundo/fundo.jpg");
+  background-position:center top ;
+  background-repeat:repeat-x;
+  font-family: Helvetica,Arial;
+  font-size:0.8em;
+  color:#666666;
+
+}
+
+.page{
+}
+
+.page a{
+
+}
+
+.page img{
+	border:none;
+	display:block;
+	margin:0px auto;
+}

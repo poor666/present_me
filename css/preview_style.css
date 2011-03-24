@@ -1,0 +1,51 @@
+  *{
+    margin:0;
+    padding:0;
+  }
+
+  #main{
+    width:100%;
+    margin:0 auto;
+  }
+  
+  body{
+    
+    background-position:center top ;
+    background-repeat:repeat-x;
+   /* background-image:url("fundo.jpg");*/
+    font-family: Helvetica,Arial;
+     font-size:0.8em;
+    color:#666666;
+    background-color:#F1F1F1;
+    padding:20px;
+  }
+  
+  
+  h3{
+    font-size:2em;
+    padding:10px 0;
+    color:red;
+  
+  }
+  
+  
+    .pages{
+    
+      clear:both;
+    
+    }
+		
+		.states{
+			float:left;
+			width:200px;
+		}
+		
+		.states img{
+      display:block;
+      width:95%;
+      border:thin black solid;
+    }
+
+.states p{
+	padding-bottom:10px;
+}
