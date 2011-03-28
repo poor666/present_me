@@ -23,12 +23,19 @@ $.address.change(function(event) {
     // $('#content').load(event.value + '.xml');
 	 //console.log(event);
 	//alert(event.value);
+	
+	if(event.value != "/"){
+		
+	}else{
+
+	}
+	
+
+	
 });
 
 $.address.init(function(event) {
-	count = 0;
-	//rotatePresentation(show,this);
-	//alert(count);
+
 });
 
 function makePresentation(arr){
@@ -48,13 +55,13 @@ function rotatePresentation(arr,e){
 	eimg = $('.page img')
 	eimg[0].src = "export/"+vector.name+"/"+vector.states[arr[count].state].state;
 	
-	ahref = $('.page a')
+	ahref = $('.page a');
 	ahref.attr('href',vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4));
 	ahref.attr('rel','address:'+vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4) );
-
+		
 	$(document).attr("title", vector.name.humanize() +', '+vector.states[arr[count].state].state.humanize().slice(0,-4) + " - " + result.setup.title );
 
-  	$.address.value($(e).attr('href'));
+  	$.address.value(vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4));
 	count++;
 	
 }
@@ -103,8 +110,7 @@ function startPage(){
 			};	
 			
 			
-			
-			//count = 0;
+			count = 0;
 			
 			makePresentation(show);
 			$(document).attr("title", data.setup.title);
