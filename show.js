@@ -17,53 +17,22 @@ function addCss(url){
 addCss("css/show_style.css");
 addScript("inflection.js");
 
+function rotatePresentation(arr){
 
-$.address.change(function(event) {
-    // do something depending on the event.value property, e.g.
-    // $('#content').load(event.value + '.xml');
-	 //console.log(event);
-	//alert(event.value);
 	
-	if(event.value != "/"){
+		var vector = result.pages[arr[count].page];
 		
-	}else{
-
-	}
-	
-
-	
-});
-
-$.address.init(function(event) {
-
-});
-
-function makePresentation(arr){
-	var vector = result.pages[arr[count].page];
-	var created = $("<div class='page'>").appendTo('#main');
-	created.append('<a href="#" rel="#"><img src="export/'+vector.name+'/'+vector.states[arr[count].state].state+'"></a>');
-	
-	$(document).attr("title", vector.name.humanize() +', '+vector.states[arr[count].state].state.humanize().slice(0,-4) + " - " + result.setup.title );
-	$.address.value(vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4));
-	count++;	
-}
-
-function rotatePresentation(arr,e){
-
-	var vector = result.pages[arr[count].page];
-	
-	eimg = $('.page img')
-	eimg[0].src = "export/"+vector.name+"/"+vector.states[arr[count].state].state;
-	
-	ahref = $('.page a');
-	ahref.attr('href',vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4));
-	ahref.attr('rel','address:'+vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4) );
+		eimg = $('.page img')
+		eimg[0].src = "export/"+vector.name+"/"+vector.states[arr[count].state].state;
 		
-	$(document).attr("title", vector.name.humanize() +', '+vector.states[arr[count].state].state.humanize().slice(0,-4) + " - " + result.setup.title );
-
-  	$.address.value(vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4));
-	count++;
-	
+		ahref = $('.page a');
+		ahref.attr('href',vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4));
+		ahref.attr('rel','address:'+vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4) );
+			
+		$(document).attr("title", vector.name.humanize() +', '+vector.states[arr[count].state].state.humanize().slice(0,-4) + " - " + result.setup.title.humanize() );
+		$.address.value(vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4));
+		count++;
+		//count = findPage(fileInit).i;
 }
 
 
@@ -76,8 +45,37 @@ $(document).ajaxError(function(event, request, settings){
 		
 		
 		startPage();
+        
+
+			$.address.externalChange(function(event) {
+				_url = event.value.split("/");
+				fileInit = {pasta:_url[1],file:_url[2]}
+				count = findPage(fileInit).i;
+				rotatePresentation(show);
+			});
 		
-        		
+		$.address.change(function(event) {
+		    // do something depending on the event.value property, e.g.
+		    // $('#content').load(event.value + '.xml');
+			 //console.log(event);
+			//alert(event.value);
+
+			_url = event.value.split("/");
+			fileInit = {pasta:_url[1],file:_url[2]}
+			
+			if(event.value != "/"){
+				
+			}else{
+				
+			}
+
+		});
+
+		$.address.init(function(event) {
+			_url = event.value.split("/");
+			fileInit = {pasta:_url[1],file:_url[2]}
+		});
+		
         
 
     });
@@ -101,7 +99,7 @@ function startPage(){
 				
 				$.each(data.pages, function(i,item){
 			        $.each(data.pages[i].states, function(ix,itemx){
-							show.push({page:i,state:ix});
+							show.push({page:i,state:ix,pageLabel:data.pages[i].name,stateLabel:data.pages[i].states[ix].state});
 					});
 				});
 				
@@ -109,16 +107,27 @@ function startPage(){
 				
 			};	
 			
+			//console.log(show)
+			//console.log(findPage(fileInit).i);
 			
-			count = 0;
+			if(!fileInit.pasta){
+				count = 0;
+			}else{
+				count = findPage(fileInit).i;
+			}
 			
-			makePresentation(show);
-			$(document).attr("title", data.setup.title);
+			var vector = result.pages[show[count].page];
+			var created = $("<div class='page'>").appendTo('#main');
+			created.append('<a href="#" rel="#"><img src="export/'+vector.name+'/'+vector.states[show[count].state].state+'"></a>');
+
+			$(document).attr("title", vector.name.humanize() +', '+vector.states[show[count].state].state.humanize().slice(0,-4) + " - " + result.setup.title );
+			$.address.value(vector.name.humanize()+'/'+vector.states[show[count].state].state.humanize().slice(0,-4));
+			count++;
 			
 
 			$("a").click(function () {
 				if(show.length == count){count = 0;}
-				rotatePresentation(show,this);
+				rotatePresentation(show);
 			});
 			
 			 $('a').address(function() {  
@@ -130,4 +139,36 @@ function startPage(){
 	
 }
 
+
+function findPage(ob){
+	
+	var res = new Array();
+	$.each(show, function(i, item){
+		if(ob.pasta.humanize() == item.pageLabel.humanize()){
+			res.push(item);
+		}
+		
+	});
+	
+	$.each(res, function(i, item){
+	
+		if(ob.file.humanize() == item.stateLabel.humanize().slice(0,-4)){
+			obFInal = {page:item.page,state:item.state};
+		}
+		
+	});
+	
+	
+	$.each(show, function(i, item){
+		
+		if((item.page==obFInal.page) &&  (item.state == obFInal.state)){
+			obFInal.i = i;
+		}
+		
+		
+	});
+	
+	return obFInal;
+	
+}
 
