@@ -1,6 +1,5 @@
 assetsURL = "http://dl.dropbox.com/u/1205299/present.me/";
 
-
 InflectionJS = {
 	id_suffix: new RegExp('(_ids|_id)$', 'g'),
 	underbar: new RegExp('_', 'g')
@@ -58,6 +57,9 @@ function rotatePresentation(arr){
 		
 		eimg = $('.page img')
 		eimg[0].src = "export/"+vector.name+"/"+vector.states[arr[count].state].state;
+		
+		$("body").css('background-image', 'url('+"export/"+vector.background.image+')');
+		$("body").css('background-repeat', vector.background.repeat);
 		
 		ahref = $('.page a');
 		ahref.attr('href',vector.name.humanize()+'/'+vector.states[arr[count].state].state.humanize().slice(0,-4));
@@ -122,7 +124,7 @@ function startPage(){
 	
 	r = window.location.pathname.split("/index.html")
 	
-	$("body").css('background-image', 'url(export/fundo/fundo.jpg)');
+	//$("body").css('background-image', 'url(export/_background/background.jpg)');
 	
 	$.getJSON('export/data.json', function(data,s,st) {
 	
