@@ -50,13 +50,36 @@ function addCss(url){
 addCss(assetsURL+"css/show_style.css");
 //addScript(assetsURL+"inflection.js");
 
+
+function loadBigViewer(imageURL)
+{
+	//$('img.loader').show();
+	$('#overlay').css('visibility','visible');
+	
+	$('.page img:not(.loader)').remove();
+	
+	var _im = $("<img>");
+	_im.hide();
+	_im.bind("load", function() {
+		//$('img.loader').hide();
+		$('#overlay').css('visibility','hidden');
+		$(this).show();
+	});
+
+	$('.page a').append(_im);
+	_im.attr('src', imageURL);
+
+}
+
+
 function rotatePresentation(arr){
 
 	
 		var vector = result.pages[arr[count].page];
 		
-		eimg = $('.page img')
-		eimg[0].src = "export/"+vector.name+"/"+vector.states[arr[count].state].state;
+		var srcIMG = "export/"+vector.name+"/"+vector.states[arr[count].state].state;
+		loadBigViewer(srcIMG);
+		
 		
 		$("body").css('background-image', 'url('+"export/"+vector.background.image+')');
 		$("body").css('background-repeat', vector.background.repeat);
@@ -76,59 +99,53 @@ $(document).ajaxError(function(event, request, settings){
   alert("falta os ficheiros");
 });
 
-function checkifLoad(){
-	count = findPage(fileInit).i;
-	rotatePresentation(show);
-}
+
+$.address.externalChange(function(event) {
+	_url = event.value.split("/");
+	fileInit = {pasta:_url[1],file:_url[2]}
+	
+	if(typeof show == "object"){
+		count = findPage(fileInit).i;
+		rotatePresentation(show);
+	}else{
+		//alert("NO");
+	}
+
+	
+});
+
+$.address.change(function(event) {
+	_url = event.value.split("/");
+	fileInit = {pasta:_url[1],file:_url[2]}
+});
+
+
+
+//*************   READY   ****************
 
     $(document).ready(function() {
-
-		startPage();
-
-			$.address.externalChange(function(event) {
-
-				_url = event.value.split("/");
-				fileInit = {pasta:_url[1],file:_url[2]}
-				
-				setTimeout(checkifLoad, 12);
-				//count = findPage(fileInit).i;
-				//rotatePresentation(show);
-
-			});
 		
-		$.address.change(function(event) {
-
-			_url = event.value.split("/");
-			fileInit = {pasta:_url[1],file:_url[2]}
-			
-			if(event.value != "/"){
-				
-			}else{
-				
-			}
-
-		});
-
 		$.address.init(function(event) {
 			_url = event.value.split("/");
-			fileInit = {pasta:_url[1],file:_url[2]}
+			fileInit = {pasta:_url[1],file:_url[2]};
+			startPage();
 		});
 		
-        
+		
 
     });
-    	
 
+//*************   *READY*   ****************
+    	
 
 function startPage(){
 	
 	r = window.location.pathname.split("/index.html")
-	
-	//$("body").css('background-image', 'url(export/_background/background.jpg)');
-	
+
 	$.getJSON('export/data.json', function(data,s,st) {
 	
     		result = data;
+
 			
 			if(result == null){
 				//console.log(result);
@@ -140,36 +157,39 @@ function startPage(){
 							show.push({page:i,state:ix,pageLabel:data.pages[i].name,stateLabel:data.pages[i].states[ix].state});
 					});
 				});
-				
-			};	
 			
-			if(!fileInit.pasta){
-				count = 0;
-			}else{
-				count = findPage(fileInit).i;
-			}
+				if( typeof(fileInit.pasta) == "string" && typeof(fileInit.file) == "string" ){
+					count = findPage(fileInit).i;
+				}else{
+					count = 0;
+				}
+
 			
-			
-			
-			var vector = result.pages[show[count].page];
-			var created = $("<div class='page'>").appendTo('#main');
-			created.append('<a href="#" rel="#"><img src="export/'+vector.name+'/'+vector.states[show[count].state].state+'"></a>');
+				var vector = result.pages[show[count].page];
+				var created = $("<div class='page'>").appendTo('#main');
+				//created.append('<a href="#" rel="#"><img src="export/'+vector.name+'/'+vector.states[show[count].state].state+'"></a>');
+				created.append('<a href="#" rel="#"><img></a>');
 			
 			
-			$(document).attr("title", vector.name.humanize() +', '+vector.states[show[count].state].state.humanize().slice(0,-4) + " - " + result.setup.title );
-			$.address.value(vector.name.humanize()+'/'+vector.states[show[count].state].state.humanize().slice(0,-4));
-			count++;
+				$(document).attr("title", vector.name.humanize() +', '+vector.states[show[count].state].state.humanize().slice(0,-4) + " - " + result.setup.title );
+				$.address.value(vector.name.humanize()+'/'+vector.states[show[count].state].state.humanize().slice(0,-4));
+				//count++;
 			
 
-			$("a").click(function () {
-				if(show.length == count){count = 0;}
+				$("a").click(function () {
+					if(show.length == count){count = 0;}
+					rotatePresentation(show);
+				});
+			
+				 $('a').address(function() {  
+					 return $(this).attr('href').replace(/^#/, '');  
+				 });
+			
+				
 				rotatePresentation(show);
-			});
+				//startWork();
 			
-			 $('a').address(function() {  
-				 return $(this).attr('href').replace(/^#/, '');  
-			 });
-			
+			};
 			
 	});
 	
@@ -177,6 +197,7 @@ function startPage(){
 
 
 function findPage(ob){
+	
 	
 	var res = new Array();
 	$.each(show, function(i, item){
@@ -193,6 +214,7 @@ function findPage(ob){
 		}
 		
 	});
+	
 	
 	
 	$.each(show, function(i, item){
