@@ -86,15 +86,15 @@
     settings: {
       opacity      : 0.2,
       overlay      : true,
-      loadingImage : 'src/loading.gif',
-      closeImage   : 'src/closelabel.png',
+      loadingImage : 'http://www.whodesign.com/core_present/src/loading.gif',
+      closeImage   : 'http://www.whodesign.com/core_present/src/closelabel.png',
       imageTypes   : [ 'png', 'jpg', 'jpeg', 'gif' ],
       faceboxHtml  : '\
     <div id="facebox" style="display:none;"> \
       <div class="popup"> \
         <div class="content"> \
         </div> \
-        <a href="#" class="close"><img src="src/closelabel.png" title="close" class="close_image" /></a> \
+        <a href="#" class="close"><img src="http://www.whodesign.com/core_present/src/closelabel.png" title="close" class="close_image" /></a> \
       </div> \
     </div>'
     },

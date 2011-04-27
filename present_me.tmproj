@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>../../../Library/Application Support/Adobe/Fireworks CS5/Commands/my_commands/SuperExport.jsf</string>
+	<string>preview.js</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -23,9 +23,13 @@
 					<key>filename</key>
 					<string>../../../Library/Application Support/Adobe/Fireworks CS5/Commands/my_commands/SuperExport.jsf</string>
 					<key>lastUsed</key>
-					<date>2011-04-02T15:30:57Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2011-04-17T02:17:14Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>../../../Library/Application Support/Adobe/Fireworks CS5/Commands/my_commands/SuperExport[OUT].jsf</string>
+					<key>lastUsed</key>
+					<date>2011-04-17T01:58:09Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -35,7 +39,7 @@
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
-	<integer>225</integer>
+	<integer>264</integer>
 	<key>metaData</key>
 	<dict>
 		<key>../../../Library/Application Support/Adobe/Fireworks CS5/Commands/my_commands/SuperExport.jsf</key>
@@ -43,38 +47,99 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>23</integer>
+				<integer>22</integer>
 				<key>line</key>
-				<integer>108</integer>
+				<integer>39</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>5</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>8</integer>
+				<key>line</key>
+				<integer>39</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>22</integer>
+				<key>line</key>
+				<integer>39</integer>
+			</dict>
+		</dict>
+		<key>css/preview_style.css</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>78</integer>
+			<integer>0</integer>
+		</dict>
+		<key>css/show_style.css</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>18</integer>
+				<key>line</key>
+				<integer>14</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>preview.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>112</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>82</integer>
 		</dict>
 		<key>show.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>69</integer>
+				<integer>108</integer>
 				<key>line</key>
-				<integer>123</integer>
+				<integer>175</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>79</integer>
+			<integer>142</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>show.js</string>
+		<string>css/preview_style.css</string>
+		<string>css/show_style.css</string>
 		<string>../../../Library/Application Support/Adobe/Fireworks CS5/Commands/my_commands/SuperExport.jsf</string>
+		<string>preview.js</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{344, 55}, {1338, 1045}}</string>
+	<string>{{343, 64}, {686, 1100}}</string>
 </dict>
 </plist>
